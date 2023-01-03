@@ -19,6 +19,7 @@ import(
 	health_sqldb "github.com/pcordeiro/go-health-sqldb"
 )
 
+// setup the health checks
 health, err := health.NewHealth(
     health.WithComponent(
         health.Component{
@@ -50,4 +51,18 @@ health, err := health.NewHealth(
         },
     ),
 )
+
+// set the router (which ever one you like. In this example I'm using fiber)
+router.Get("/", func(ctx *fiber.Ctx) error {
+    // execute the checks
+    result := health.Check(ctx.Context())
+
+    if result.Status != "OK" {
+        ctx.Status(fiber.StatusServiceUnavailable)
+    } else {
+        ctx.Status(fiber.StatusOK)
+    }
+
+    return ctx.JSON(result)
+})
 ```
