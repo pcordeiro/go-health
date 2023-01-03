@@ -44,7 +44,7 @@ health, err := health.NewHealth(
             SkipOnErr: false,
             Check: healthhttp.NewHttpCheck(&healthhttp.Config{
                 Name:    "Google",
-                URL:     "https://gooooogle.com",
+                URL:     "https://google.com",
                 Timeout: 2 * time.Second,
             }),
         },
