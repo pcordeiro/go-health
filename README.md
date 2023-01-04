@@ -38,7 +38,7 @@ health, err := health.NewHealth(
                 Name:   "MS SQL Server",
                 Driver: config.Get().Database.Driver,
                 DSN:    config.Get().Database.DSN,
-                Select: "SELECT @@VERSIONs",
+                Select: "SELECT @@VERSION",
             }),
         },
         health.Check{
